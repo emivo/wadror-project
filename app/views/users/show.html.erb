@@ -1,0 +1,12 @@
+<p>
+  <strong>Username:</strong>
+  <%= @user.username %>
+</p>
+<!--todo osoite tiedot ylläpitäjän näkyviin-->
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+<!--TODO vain itse-->
+<%= link_to 'Edit', edit_user_path(@user) %>
+
