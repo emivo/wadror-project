@@ -17,6 +17,9 @@
   <strong>Stock:</strong>
   <%= @product.stock %>
 </p>
+
+<%= image_tag @product.photo.url(:thumb) %>
+
 <% if current_user && current_user.admin %>
     <%= link_to 'Edit', edit_product_path(@product), class: 'btn btn-primary' %>
 <% end %>
