@@ -6,6 +6,8 @@ class SessionsController < ApplicationController
     user = User.find_by username: params[:username]
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
+      cart = Order.find_by(user_id: user.id, paid: false)
+      session[:order_id] = cart.id unless cart.nil?
       redirect_to user, notice: "Welcome back!"
     else
       redirect_to :back, notce: "User and password mismatch"

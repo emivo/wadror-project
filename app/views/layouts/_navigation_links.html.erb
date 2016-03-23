@@ -1,8 +1,13 @@
 <%# add navigation links to this file %>
-<li> <%= link_to 'categories', categories_path %> </li>
-<% if not current_user.nil? %>
-    <li> <%= link_to 'signout', signout_path, method: :delete %> </li>
+<li> <%= link_to 'Categories', categories_path %> </li>
+<% if current_cart %>
+    <li> <%= link_to 'Cart', order_path(current_cart.id) %> </li>
 <% else %>
-    <li> <%= link_to 'signin', signin_path %> </li>
-    <li> <%= link_to 'signup', signup_path %> </li>
+    <li> <%= link_to 'Cart', orders_path, method: :post %></li>
+<% end %>
+<% if not current_user.nil? %>
+    <li> <%= link_to 'Sign out', signout_path, method: :delete %> </li>
+<% else %>
+    <li> <%= link_to 'Sign in', signin_path %> </li>
+    <li> <%= link_to 'Sign up', signup_path %> </li>
 <% end %>
