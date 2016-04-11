@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :set_categories, only: [:new, :edit]
+  before_action :ensure_admin, only: [:new, :edit, :update, :destroy]
 
   # GET /products
   # GET /products.json
@@ -77,5 +78,11 @@ class ProductsController < ApplicationController
 
   def set_categories
     @categories = Category.all
+  end
+
+  def ensure_admin
+    unless current_user.admin
+      redirect_to :back, notice: 'You are not administrator'
+    end
   end
 end

@@ -1,9 +1,10 @@
 source 'https://rubygems.org'
 
 group :development, :test do
+  gem 'better_errors'
   gem 'sqlite3'
+  gem 'rspec-rails', '~> 3.0'
 end
-
 group :production do
   gem 'pg'
   gem 'rails_12factor'

@@ -1,6 +1,12 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :authorize]
+  before_action :authorize, only: [:edit, :update, :destroy]
 
+  def authorize
+    if current_user != @user && !current_user.admin
+      redirect_to :back, notice: 'Unauthorized action'
+    end
+  end
   # GET /users
   # GET /users.json
   def index

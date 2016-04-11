@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
   helper_method :current_cart
+  helper_method :ensure_admin
+  helper_method :ensure_logged_in
 
   def current_user
     return nil if session[:user_id].nil?
@@ -15,5 +17,18 @@ class ApplicationController < ActionController::Base
   def current_cart
     return nil if session[:order_id].nil?
     Order.find(session[:order_id])
+  end
+
+  def ensure_logged_in
+    if current_user.nil?
+      redirect_to :back, notice: 'You need to log in'
+    end
+  end
+
+  def ensure_admin
+    ensure_logged_in
+    unless current_user.admin
+      redirect_to :back, notice: 'You are not administrator'
+    end
   end
 end
