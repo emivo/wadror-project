@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
       session[:order_id] = cart.id unless cart.nil?
       redirect_to user, notice: "Welcome back!"
     else
-      redirect_to :back, notce: "User and password mismatch"
+      redirect_to :back, notice: "User and password mismatch"
     end
   end
 

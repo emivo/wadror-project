@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
     User.find(session[:user_id])
   end
 
+
   def current_cart
     return nil if session[:order_id].nil?
     Order.find(session[:order_id])
