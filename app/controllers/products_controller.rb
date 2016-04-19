@@ -81,6 +81,9 @@ class ProductsController < ApplicationController
   end
 
   def ensure_admin
+    unless current_user
+      redirect_to :back, notice: 'You are not logged in'
+    end
     unless current_user.admin
       redirect_to :back, notice: 'You are not administrator'
     end
