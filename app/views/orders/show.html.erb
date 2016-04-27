@@ -1,8 +1,9 @@
+<% if admin %>
 <p>
-  <!--Todo show only for admin-->
   <strong>User:</strong>
   <%= @order.user_id %>
 </p>
+    <%end%>
 <table class="table table-hover">
   <thead>
   <tr>
@@ -16,7 +17,7 @@
       <tr>
         <td><%= link_to p.product.name, p.product %></td>
         <% unless @order.paid %>
-            <td><%= link_to 'Remove', remove_product_path(p.id), method: :delete, data: {confirm: 'Are you sure?'} %></td>
+            <td><%= link_to 'Remove', remove_product_path(p.id), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger' %></td>
         <% end %>
       </tr>
   <% end %>
@@ -24,5 +25,7 @@
 </table>
 <% if @products.empty? %>
     <p> cart is empty </p>
+<% else %>
+<%= link_to 'Pay and place an order', pay_path(@order.id) %>
 <% end %>
 

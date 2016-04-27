@@ -12,16 +12,23 @@
   <strong>Description:</strong>
   <%= @product.description %>
 </p>
-
+<% if admin %>
 <p>
   <strong>Stock:</strong>
   <%= @product.stock %>
 </p>
+<% end %>
 
 <%= image_tag @product.photo.url(:thumb) %>
 
-<% if current_user && current_user.admin %>
+<% if admin %>
     <%= link_to 'Destroy', @product, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
     <%= link_to 'Edit', edit_product_path(@product), class: 'btn btn-primary' %>
 <% end %>
+<% if @product.stock > 0 %>
 <%= link_to 'Add to cart', add_product_path(@product.id), method: :post, class: 'btn btn-success' %>
+<% else %>
+    <p>
+      <strong>Out of stock</strong>
+    </p>
+<% end %>

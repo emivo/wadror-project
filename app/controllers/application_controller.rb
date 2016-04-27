@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   helper_method :current_user
+  helper_method :admin
   helper_method :current_cart
   helper_method :ensure_admin
   helper_method :ensure_logged_in
@@ -30,5 +31,10 @@ class ApplicationController < ActionController::Base
     unless current_user.admin
       redirect_to :back, notice: 'You are not administrator'
     end
+  end
+
+  def admin
+    return nil if current_user.nil?
+    current_user.admin
   end
 end

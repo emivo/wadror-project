@@ -9,6 +9,14 @@ group :production do
   gem 'pg'
   gem 'rails_12factor'
 end
+group :test do
+  gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'launchy'
+  gem 'webmock'
+  gem 'simplecov', require: false
+end
+
 #file attachment
 gem 'paperclip'
 

@@ -5,7 +5,7 @@
 <% else %>
     <li> <%= link_to 'Cart', orders_path, method: :post %></li>
 <% end %>
-<% if not current_user.nil? %>
+<% if current_user %>
     <li> <%= link_to 'Sign out', signout_path, method: :delete %> </li>
 <% else %>
     <li> <%= link_to 'Sign in', signin_path %> </li>

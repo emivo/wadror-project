@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'signin', to: 'sessions#new'
   delete 'signout', to: 'sessions#destroy'
   post 'add_product/:id', to: 'orders#add_product', as: :add_product
+  post 'pay_order/:id', to: 'orders#pay', as: :pay
   delete 'remove_product/:id', to: 'orders#remove_product', as: :remove_product
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
