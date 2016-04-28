@@ -1,6 +1,15 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:show, :edit, :update, :destroy, :pay]
+  before_action :set_order, only: [:show, :edit, :update, :destroy, :pay, :ensure_own_order]
+  before_action :ensure_admin, only: [:destroy, :index]
+  before_action :ensure_logged_in, only: [:show, :edit, :update]
 
+
+  def ensure_own_order
+    ensure_logged_in
+    unless @order.user_id == current_user.id
+      redirect_to :root, notice: 'not your order'
+    end
+  end
   # GET /orders
   # GET /orders.json
   def index

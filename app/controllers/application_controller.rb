@@ -22,14 +22,14 @@ class ApplicationController < ActionController::Base
 
   def ensure_logged_in
     if current_user.nil?
-      redirect_to :back, notice: 'You need to log in'
+      redirect_to :root, notice: 'You need to log in'
     end
   end
 
   def ensure_admin
     ensure_logged_in
     unless current_user.admin
-      redirect_to :back, notice: 'You are not administrator'
+      redirect_to :root, notice: 'You are not administrator'
     end
   end
 

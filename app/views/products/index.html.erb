@@ -1,14 +1,8 @@
-
+<% content_for(:body_attributes) do %>
+    data-no-turbolink="true"
+<% end %>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular.min.js"></script>
-<script>
-  var myApp = angular.module('myApp', []);
-  myApp.controller("ProductsController", function ($scope, $http) {
-    $http.get('products.json').success( function(data, status, headers, config) {
-      $scope.products = data;
-    });
-    $scope.searchText = '';
-  });
-</script>
+<%= javascript_include_tag 'site' %>
 
 <h2>Products</h2>
 

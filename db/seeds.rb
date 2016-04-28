@@ -24,5 +24,5 @@ end
 end
 
 Product.all.each do |p|
-
+  p.categories << Category.first
 end

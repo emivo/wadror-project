@@ -1,12 +1,15 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :authorize]
-  before_action :authorize, only: [:edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :ensure_own_profile]
+  before_action :ensure_own_profile, only: [:show, :edit, :update]
+  before_action :ensure_admin, except: [:show, :edit, :update]
 
-  def authorize
-    if current_user != @user && !current_user.admin
-      redirect_to :back, notice: 'Unauthorized action'
+  def ensure_own_profile
+    ensure_logged_in
+    unless current_user == @user
+      redirect_to :root, notice: 'You can edit only your own profile'
     end
   end
+
   # GET /users
   # GET /users.json
   def index
