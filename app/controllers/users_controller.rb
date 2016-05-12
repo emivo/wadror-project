@@ -1,12 +1,12 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy, :ensure_own_profile]
-  before_action :ensure_own_profile, only: [:edit, :update]
-  before_action :ensure_admin, except: [:new, :create, :show, :edit, :update]
+  before_action :ensure_logged_in, only: :ensure_own_profile
+  before_action :ensure_own_profile, only: [:edit, :update, :show]
+  before_action :ensure_admin, except: [:new, :create, :edit, :update, :index]
 
   def ensure_own_profile
-    ensure_logged_in
-    unless current_user == @user
-      redirect_to :root, notice: 'You can edit only your own profile'
+    if current_user != @user and !admin
+      redirect_to :root, alert: 'You can edit only your own profile'
     end
   end
 

@@ -13,20 +13,32 @@
   <%= @product.description %>
 </p>
 <% if admin %>
-<p>
-  <strong>Stock:</strong>
-  <%= @product.stock %>
-</p>
+    <p>
+      <strong>Stock:</strong>
+      <%= @product.stock %>
+    </p>
 <% end %>
 
 <%= image_tag @product.photo.url(:thumb) %>
 
 <% if admin %>
-    <%= link_to 'Destroy', @product, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+    <%= link_to 'Destroy', @product, method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger' %>
     <%= link_to 'Edit', edit_product_path(@product), class: 'btn btn-primary' %>
 <% end %>
-<% if @product.stock > 0 and !admin %>
-<%= link_to 'Add to cart', add_product_path(@product.id), method: :post, class: 'btn btn-success' %>
+<% if @product.stock > 0 %>
+
+    <%= form_tag add_product_path(@product.id) do %>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="input-group input-group-sm">
+              <%= number_field_tag :quantity, '1', class: 'form-control' %>
+              <div class="input-group-btn">
+                <%= submit_tag 'Add to cart', class: 'btn btn-success' %>
+              </div>
+            </div>
+          </div>
+        </div>
+    <% end %>
 <% else %>
     <p>
       <strong>Out of stock</strong>

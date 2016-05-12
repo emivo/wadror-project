@@ -28,8 +28,10 @@
               <% if order.paid %>
                   <span class="label label-sm label-success">Paid</span>
               <% else %>
-              <%= link_to 'Destroy', order, method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-sm btn-danger' %>
-              <%= link_to 'Pay', pay_path(order.id), method: :post, class: 'btn btn-sm btn-success' %>
+                  <%= link_to 'Destroy', order, method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-sm btn-danger' %>
+                  <% unless order.products.empty? %>
+                      <%= link_to 'Pay', pay_path(order.id), method: :post, class: 'btn btn-sm btn-success' %>
+                  <% end %>
               <% end %>
             </td>
           </tr>
