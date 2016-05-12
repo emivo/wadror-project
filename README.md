@@ -7,3 +7,5 @@ Web-palvelinohjelmoinnin harjoitustyö
 
 [Dokumentaatio](https://github.com/emivo/wadror-project/wiki/Dokumentaatio)
 [Tuntikirjaus](https://github.com/emivo/wadror-project/wiki/Tuntikirjanpito)
+
+Ylläpitokäyttäjän tunnus: admin, salasana: TopSecret1
