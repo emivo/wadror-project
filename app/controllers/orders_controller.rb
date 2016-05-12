@@ -1,19 +1,24 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:show, :edit, :update, :destroy, :pay, :ensure_own_order]
-  before_action :ensure_admin, only: [:destroy, :index]
-  before_action :ensure_logged_in, only: [:show, :edit, :update]
+  before_action :set_order, only: [:show, :destroy, :pay, :ensure_own_order, :change_cart]
+  before_action :ensure_admin, only: [:destroy]
+  before_action :ensure_own_order, only: [:show, :change_cart, :pay]
+  before_action :ensure_order_has_items, only: [:pay]
 
 
   def ensure_own_order
     ensure_logged_in
-    unless @order.user_id == current_user.id
+    if @order.user_id != current_user.id and !admin
+      #admin is authorized to modify carts and orders
       redirect_to :root, notice: 'not your order'
     end
   end
   # GET /orders
   # GET /orders.json
   def index
-    @orders = Order.all
+      @orders = Order.all.includes(:user)
+    unless admin
+      @orders = Order.where(user: current_user)
+    end
   end
 
   # GET /orders/1
@@ -22,44 +27,11 @@ class OrdersController < ApplicationController
     @products = ProductQuantityInOrder.where(order_id: @order.id).includes(:product)
   end
 
-  # GET /orders/new
-  def new
-  end
-
-  # GET /orders/1/edit
-  def edit
-  end
-
   # POST /orders
   # POST /orders.json
   def create
     create_cart
     redirect_to current_cart
-    # @order = Order.new(order_params)
-    #
-    # respond_to do |format|
-    #   if @order.save
-    #     format.html { redirect_to @order, notice: 'Order was successfully created.' }
-    #     format.json { render :show, status: :created, location: @order }
-    #   else
-    #     format.html { render :new }
-    #     format.json { render json: @order.errors, status: :unprocessable_entity }
-    #   end
-    # end
-  end
-
-  # PATCH/PUT /orders/1
-  # PATCH/PUT /orders/1.json
-  def update
-    respond_to do |format|
-      if @order.update(order_params)
-        format.html { redirect_to @order, notice: 'Order was successfully updated.' }
-        format.json { render :show, status: :ok, location: @order }
-      else
-        format.html { render :edit }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # DELETE /orders/1
@@ -78,13 +50,28 @@ class OrdersController < ApplicationController
   def pay
 # TODO usage
     @order.update_attribute(:paid, true)
+    session[:order_id] = nil
+    redirect_to @order, notice: 'Order placed'
+  end
+
+  def ensure_order_has_items
+    if @order.products.empty?
+      redirect_to @order, notice: 'This order is empty!'
+    end
+  end
+
+  def change_cart
+    if current_cart and current_cart.products.empty?
+      current_cart.destroy
+    end
+    session[:order_id] = @order.id
+    redirect_to @order, notice: 'This is now your current cart'
   end
 
   def add_product
     product = Product.find(params[:id])
 
     create_cart
-    # TODO in future possible to add more. Can do with session or params
     ProductQuantityInOrder.create product_id: product.id, order_id: current_cart.id, quantity: 1
     redirect_to product, notice: 'Item added to cart'
   end
@@ -105,7 +92,6 @@ class OrdersController < ApplicationController
       if current_user
         new_cart = Order.create user_id: current_user.id
       else
-        # todo use the hash or something if not logged in
         new_cart = Order.create
       end
       session[:order_id] = new_cart.id

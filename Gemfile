@@ -36,6 +36,7 @@ gem 'bootstrap-sass'
 group :development do
   gem 'rails_layout'
 end
+gem 'will_paginate', '~> 3.1.0'
 gem 'coveralls', require: false
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

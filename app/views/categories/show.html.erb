@@ -13,10 +13,16 @@
   </thead>
 
   <tbody>
-  <% @category.products.each do |product| %>
+  <% @products.each do |product| %>
       <tr>
         <td><%= link_to product.name, product %></td>
       </tr>
   <% end %>
   </tbody>
 </table>
+<%= will_paginate @products %><br>
+
+<% if admin %>
+    <%= link_to 'Edit', edit_category_path(@category), class: 'btn bnt-sm btn-primary' %>
+    <%= link_to 'Delete category', @category, method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-sm btn-danger' %>
+<% end %>

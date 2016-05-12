@@ -5,6 +5,9 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by username: params[:username]
     if user && user.authenticate(params[:password])
+      if current_cart
+        current_cart.update_attribute(:user_id, user.id)
+      end
       session[:user_id] = user.id
       cart = Order.find_by(user_id: user.id, paid: false)
       session[:order_id] = cart.id unless cart.nil?

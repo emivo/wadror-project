@@ -3,7 +3,7 @@
  */
 var myApp = angular.module('myApp', []);
 myApp.controller("ProductsController", function ($scope, $http) {
-    $http.get('products.json').success( function(data, status, headers, config) {
+    $http.get('products_all.json').success( function(data, status, headers, config) {
         $scope.products = data;
     });
     $scope.searchText = '';

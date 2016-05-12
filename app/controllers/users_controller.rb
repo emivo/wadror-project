@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy, :ensure_own_profile]
-  before_action :ensure_own_profile, only: [:show, :edit, :update]
-  before_action :ensure_admin, except: [:show, :edit, :update]
+  before_action :ensure_own_profile, only: [:edit, :update]
+  before_action :ensure_admin, except: [:new, :create, :show, :edit, :update]
 
   def ensure_own_profile
     ensure_logged_in
@@ -71,13 +71,13 @@ class UsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user
+    @user = User.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def user_params
-      params.require(:user).permit(:username, :email, :address, :zip_code, :city, :password, :password_confirmation)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def user_params
+    params.require(:user).permit(:username, :email, :address, :zip_code, :city, :password, :password_confirmation)
+  end
 end

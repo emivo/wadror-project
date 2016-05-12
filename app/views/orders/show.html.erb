@@ -1,9 +1,12 @@
 <% if admin %>
-<p>
-  <strong>User:</strong>
-  <%= @order.user_id %>
-</p>
-    <%end%>
+    <p>
+      <strong>User:</strong>
+      <%= @order.user.username %>
+    </p>
+<% end %>
+<% if @order.paid %>
+    <span class="label label-sm label-success">Paid</span>
+<% end %>
 <table class="table table-hover">
   <thead>
   <tr>
@@ -22,10 +25,18 @@
       </tr>
   <% end %>
   </tbody>
-</table>
+</table><br>
 <% if @products.empty? %>
     <p> cart is empty </p>
 <% else %>
-<%= link_to 'Pay and place an order', pay_path(@order.id) %>
+    <% unless current_cart.paid %>
+        <%= link_to 'Pay and place an order', pay_path(@order.id), method: :post, class: 'btn btn-success' %>
+    <% end %>
 <% end %>
+<br>
+<% if !@products.empty? and !@order.paid and current_cart != @order %>
+    <%= link_to 'Change current cart to this order', change_cart_path(@order.id), method: :post, class: 'btn btn-primary' %>
+<% end %>
+<br>
+<%= link_to 'Orders', orders_path, class: 'btn btn-info' %>
 

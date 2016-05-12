@@ -25,7 +25,7 @@
     <%= link_to 'Destroy', @product, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
     <%= link_to 'Edit', edit_product_path(@product), class: 'btn btn-primary' %>
 <% end %>
-<% if @product.stock > 0 %>
+<% if @product.stock > 0 and !admin %>
 <%= link_to 'Add to cart', add_product_path(@product.id), method: :post, class: 'btn btn-success' %>
 <% else %>
     <p>

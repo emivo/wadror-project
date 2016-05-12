@@ -2,11 +2,34 @@
   <strong>Username:</strong>
   <%= @user.username %>
 </p>
-<!--todo osoite tiedot ylläpitäjän näkyviin-->
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
-<!--TODO vain itse-->
-<%= link_to 'Edit', edit_user_path(@user) %>
+<% if admin %>
+    <div class="row">
+      <div class="col-md-4">
+        <strong>Street:</strong><br>
+        <%= @user.address %>
+      </div>
+      <div class="col-md-4">
+        <strong>Email:</strong><br>
+        <%= @user.email %>
+      </div>
+    </div>
 
+    <div class="row">
+      <div class="col-md-4">
+        <strong>Zip code:</strong><br>
+        <%= @user.zip_code %>
+      </div>
+      <div class="col-md-4">
+        <strong>City:</strong><br>
+        <%= @user.city %>
+      </div>
+    </div>
+<% end %>
+<br>
+<div class="row">
+  <div class="col-md-4">
+  <% if current_user == @user %>
+      <%= link_to 'Edit', edit_user_path(@user), class: 'btn btn-success' %>
+  <% end %>
+    </div>
+</div>

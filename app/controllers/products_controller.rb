@@ -6,6 +6,11 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
+    #@products = Product.all
+    @products = Product.paginate(:page => params[:page], :per_page => 10)
+  end
+
+  def all
     @products = Product.all
   end
 
@@ -35,7 +40,7 @@ class ProductsController < ApplicationController
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
         format.json { render :show, status: :created, location: @product }
       else
-        format.html { render :new }
+        format.html { redirect_to new_product_path }
         format.json { render json: @product.errors, status: :unprocessable_entity }
       end
     end

@@ -3,9 +3,9 @@
 <%= form_tag session_path do %>
     <div class="row">
       <div class="form-group col-md-6">
-        username <%= text_field_tag :username, params[:username], class: "form-control" %>
-        password <%= password_field_tag :password, params[:password], class: "form-control" %>
+        username <%= text_field_tag :username, params[:username], class: 'form-control' %>
+        password <%= password_field_tag :password, params[:password], class: 'form-control' %>
       </div>
     </div>
-    <%= submit_tag "Log in", class: "btn" %>
+    <%= submit_tag 'Log in', class: 'btn'%>
 <% end %>

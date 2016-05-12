@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :orders
+  resources :orders, only: [:index, :create, :show, :destroy, :pay]
   resources :categories
   resources :users
   resources :products
@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   delete 'signout', to: 'sessions#destroy'
   post 'add_product/:id', to: 'orders#add_product', as: :add_product
   post 'pay_order/:id', to: 'orders#pay', as: :pay
+  post 'change_cart/:id', to: 'orders#change_cart', as: :change_cart
   delete 'remove_product/:id', to: 'orders#remove_product', as: :remove_product
+  get 'products_all', to: 'products#all', as: :all_products
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
