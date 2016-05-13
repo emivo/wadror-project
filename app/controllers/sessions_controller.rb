@@ -26,6 +26,6 @@ class SessionsController < ApplicationController
     end
     session[:order_id] = nil
     session[:anon_id] = nil
-    redirect_to :root
+    redirect_to :root, notice: 'You have been successfully logged out!'
   end
 end
