@@ -4,6 +4,7 @@ group :development, :test do
   gem 'better_errors'
   gem 'sqlite3'
   gem 'rspec-rails', '~> 3.0'
+  gem 'coveralls', require: false
 end
 group :production do
   gem 'pg'
@@ -37,7 +38,6 @@ group :development do
   gem 'rails_layout'
 end
 gem 'will_paginate', '~> 3.1.0'
-gem 'coveralls', require: false
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
