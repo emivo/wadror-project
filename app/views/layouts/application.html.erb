@@ -1,25 +1,26 @@
 <!DOCTYPE html>
-  <html>
-
-    <head>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title><%= content_for?(:title) ? yield(:title) : "Record Shop C" %></title>
-      <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Record Shop C" %>">
-      <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
-      <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-      <%= csrf_meta_tags %>
-    </head>
-    <body>
-      <header>
-        <%= render 'layouts/navigation' %>
-      </header>
-      <main role="main" class=".container">
-        <%= render 'layouts/messages' %>
-        <div class="row">
-          <div class="col-md-8">
-            <%= yield %>
-          </div>
-        </div>
-      </main>
-  </body>
-  </html>
+<html>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= content_for?(:title) ? yield(:title) : "Record Shop C" %></title>
+  <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Record Shop C" %>">
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'site' %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<header>
+  <%= render 'layouts/navigation' %>
+</header>
+<main role="main" class=".container">
+  <%= render 'layouts/messages' %>
+  <div class="row">
+    <div class="col-md-8">
+      <%= yield %>
+    </div>
+  </div>
+</main>
+</body>
+</html>
