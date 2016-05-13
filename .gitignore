@@ -21,3 +21,5 @@
 
 # Ignore all attached files
 /public/system/**
+
+/coverage

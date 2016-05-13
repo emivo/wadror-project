@@ -3,6 +3,7 @@ Web-palvelinohjelmoinnin harjoitustyö
 [Linkki Heroku-instassiin](https://recordshopc.herokuapp.com/)
 [![Build Status](https://travis-ci.org/emivo/wadror-project.svg?branch=master)](https://travis-ci.org/emivo/wadror-project)
 [![Coverage Status](https://coveralls.io/repos/github/emivo/wadror-project/badge.svg?branch=master)](https://coveralls.io/github/emivo/wadror-project?branch=master)
+[![Code Climate](https://codeclimate.com/github/emivo/wadror-project/badges/gpa.svg)](https://codeclimate.com/github/emivo/wadror-project)
 
 
 [Dokumentaatio](https://github.com/emivo/wadror-project/wiki/Dokumentaatio)
