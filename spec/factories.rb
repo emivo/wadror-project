@@ -24,6 +24,5 @@ FactoryGirl.define do
 
   factory :category do
     name "CDs"
-    product
   end
 end

@@ -3,6 +3,7 @@ include Helpers
 describe "Categories page" do
 
   before :each do
+    FactoryGirl.create :user
     sign_in(username: "Antti", password: "Lorem1")
   end
 
