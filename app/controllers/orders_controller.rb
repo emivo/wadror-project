@@ -79,12 +79,17 @@ class OrdersController < ApplicationController
   end
 
   def add_product
-    create_cart
-    new_item = ProductQuantityInOrder.new params.permit(:quantity)
-    new_item.product_id = params[:id]
     quantity = Integer(params[:quantity])
     if quantity > 0
-      new_item.order = current_cart
+      create_cart
+      new_item = ProductQuantityInOrder.find_by(product_id: params[:id], order_id: current_cart.id)
+      if new_item.nil?
+        new_item = ProductQuantityInOrder.new params.permit(:quantity)
+        new_item.product_id = params[:id]
+        new_item.order = current_cart
+      else
+        new_item.quantity += quantity
+      end
       new_item.save!
       redirect_to product_path(params.permit(:id)), notice: "#{pluralize(quantity, 'Item')} added to cart"
     else
