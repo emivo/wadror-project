@@ -3,7 +3,7 @@
 <% end %>
 <h2>Products</h2>
 
-<body ng-app="myApp" ng-controller="ProductsController">
+<div ng-app="myApp" ng-controller="ProductsController">
 
   search: <input ng-model="searchText">
 
@@ -18,7 +18,7 @@
       <td>{{product.price}}</td>
     </tr>
   </table>
-</body>
+</div>
 
 
 <% if admin %>
