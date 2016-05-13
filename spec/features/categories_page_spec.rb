@@ -7,10 +7,9 @@ describe "Categories page" do
   end
 
   it "should contain category that has been created" do
-    product = FactoryGirl.create :product
-    #c = Category.create name:'cds'
+    Category.create name:'cds'
 
     visit categories_path
-    #expect(page).to have_content 'cds'
+    expect(page).to have_content 'cds'
   end
 end
