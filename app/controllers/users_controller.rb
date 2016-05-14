@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy, :ensure_own_profile]
   before_action :ensure_logged_in, only: :ensure_own_profile
   before_action :ensure_own_profile, only: [:edit, :update, :show]
-  before_action :ensure_admin, except: [:new, :create, :edit, :update, :index]
+  before_action :ensure_admin, except: [:new, :create, :edit, :update, :show]
 
   def ensure_own_profile
     if current_user != @user and !admin

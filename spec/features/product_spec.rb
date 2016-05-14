@@ -20,4 +20,14 @@ describe "Product" do
     expect(page).to have_content 'Some great album'
   end
 
+  it "should be change name updated" do
+    p = FactoryGirl.create :product, name: 'compact disc'
+    visit edit_product_path(p.id)
+    fill_in('product[name]', with: 'Compact Disc')
+    click_button 'Update Product'
+    visit products_path
+    expect(page).not_to have_content 'compact disc'
+    expect(page).to have_content 'Compact Disc'
+  end
+
 end

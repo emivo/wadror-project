@@ -15,14 +15,4 @@ describe "Categories page" do
     visit categories_path
     expect(page).to have_content 'cds'
   end
-
-  it "should change categorys name when updated" do
-      c = Category.create name: 'cds'
-      visit edit_category_path(c.id)
-      fill_in('category[name]', with: 'CDs')
-      click_button 'Update Category'
-      visit categories_path
-      expect(page).not_to have_content 'cds'
-      expect(page).to have_content 'CDs'
-  end
 end

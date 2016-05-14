@@ -6,11 +6,21 @@
     <li> <%= link_to 'Cart', orders_path, method: :post %></li>
 <% end %>
 <% if current_user %>
-    <li> <%= link_to 'Orders', orders_path %> </li>
+    <li role="presentation" class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+        <%= current_user.username %><span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu">
+        <li> <%= link_to 'Orders', orders_path %> </li>
+        <li> <%= link_to 'My page', current_user %> </li>
+        <li> <%= link_to 'Sign out', signout_path, method: :delete %> </li>
+      </ul>
+    </li>
+
     <% if admin %>
         <li> <%= link_to 'Users', users_path %> </li>
     <% end %>
-    <li> <%= link_to 'Sign out', signout_path, method: :delete %> </li>
+
 <% else %>
     <li> <%= link_to 'Sign in', signin_path %> </li>
     <li> <%= link_to 'Sign up', signup_path %> </li>
