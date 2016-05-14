@@ -5,6 +5,9 @@
 <% else %>
     <li> <%= link_to 'Cart', orders_path, method: :post %></li>
 <% end %>
+<% if admin %>
+    <li> <%= link_to 'Users', users_path %> </li>
+<% end %>
 <% if current_user %>
     <li role="presentation" class="dropdown">
       <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
@@ -17,9 +20,6 @@
       </ul>
     </li>
 
-    <% if admin %>
-        <li> <%= link_to 'Users', users_path %> </li>
-    <% end %>
 
 <% else %>
     <li> <%= link_to 'Sign in', signin_path %> </li>
