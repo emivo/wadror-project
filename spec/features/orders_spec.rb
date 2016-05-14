@@ -61,6 +61,14 @@ describe "Orders" do
     expect(page).to have_content 'cart is empty'
   end
 
+  it "should not to be able to pay without logged in" do
+    click_link 'Sign out'
+    add_one_cd_to_cart
+    click_link 'Cart'
+    click_link 'Pay and place an order'
+    expect(page).to have_content 'You must login first'
+  end
+
   it "should be able to change cart with unpaid one" do
     add_one_cd_to_cart
     click_link 'Sign out'

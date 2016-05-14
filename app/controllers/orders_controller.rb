@@ -1,7 +1,8 @@
 class OrdersController < ApplicationController
   include ActionView::Helpers::TextHelper
   before_action :set_order, only: [:show, :destroy, :pay, :ensure_own_order, :change_cart]
-  before_action :ensure_own_order, only: [:show, :change_cart, :pay, :destroy]
+  before_action :ensure_own_order, only: [:change_cart, :pay, :destroy]
+  before_action :ensure_own_order_or_admin, only: [:show]
   before_action :ensure_order_has_items, only: [:pay]
 
   def ensure_own_order
@@ -9,8 +10,15 @@ class OrdersController < ApplicationController
       unless @order.user_id == session[:anon_id]
         redirect_to :root, alert: 'not your order'
       end
-    elsif @order.user_id != current_user.id and !admin
+    elsif @order.user_id != current_user.id
       redirect_to :root, alert: 'not your order'
+    end
+    false
+  end
+
+  def ensure_own_order_or_admin
+    unless admin
+      ensure_own_order
     end
   end
 
